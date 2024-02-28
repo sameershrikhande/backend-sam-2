@@ -1,7 +1,6 @@
 // require('dotenv').config({path: './env'})
 import dotenv from "dotenv"
 import connectBD from "./db/index.js";
-import express from "express";
 import {app} from "./app.js"
 
 dotenv.config({
@@ -24,8 +23,7 @@ connectBD()
 
 
 /*
-import express from "express"
-const app = express()
+// using IFFI method () ()
 ;( async () => {
     try {
         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)                                ASSIGNMENT
@@ -34,7 +32,7 @@ const app = express()
         })
 
         app.listen(process.env.PORT, () => {
-            console.log(`App is listening on port ${process.env.PORT}`);
+            console.log(`Server is running at port : http://localhost:${process.env.PORT}`);
         })
 
     } catch (error) {
