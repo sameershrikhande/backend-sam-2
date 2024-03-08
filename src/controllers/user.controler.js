@@ -251,7 +251,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async(req, res) => {
     return res
     .status(200)
-    .json(200, req.user, "current user fetched successsfully")
+    .json(new ApiResponse(200, req.user, "current user fetched successsfully"))
 })
 
 const updateAccountDetails = asyncHandler(async(req, res) => {
@@ -261,7 +261,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
         throw new ApiError(400, "All fields are required")
     }
 
-    const user = User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set: {
@@ -280,6 +280,8 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
 
 const updateUserAvatar = asyncHandler(async(req, res) => {
     const avatarLocalPath = req.file?.path
+
+    // todo: delete old image
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is missing")
